@@ -1,0 +1,114 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.lineup {
+    background-color: v.$coldsky;
+    padding: 5rem 0;
+    h2, p {
+        text-align: center;
+        color: v.$cream;
+    }
+    h2 {
+        transform: rotate(-3deg);
+        color: v.$cream;
+        font-size: 6rem;
+        margin-bottom: 1rem;
+    }
+    span {
+        color: v.$aflo;
+        font-size: 5rem;
+        font-family: v.$fourth_font;
+        text-shadow: -6px 6px 0px v.$blacky;
+    }
+
+    .dia-contenedor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1.5rem 0 2rem 0;
+    }
+    .dia {
+        color: v.$blacky;
+    }
+}
+
+.escenario-contenedor {
+    @include m.tablet {
+        @include m.grid(2, 5rem);
+    }
+    p {
+        color: v.$blacky;
+    }
+}
+.escenario {
+    padding-top: 2rem;
+    .nombre-escenario {
+        &::after {
+            content: '';
+            display: block;
+            width: 20rem;
+            height: 5rem;
+            background-size: 15rem;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin: 1.5rem auto 0 auto;
+        }
+    }
+}
+.metallica .nombre-escenario::after {
+    background-image: url(/build/img/metallica.avif);
+}
+.oasis .nombre-escenario::after {
+    background-image: url(/build/img/oasis.avif);
+}
+.acdc .nombre-escenario::after {
+    background-image: url(/build/img/acdc.avif);
+}
+.soad .nombre-escenario::after {
+    background-image: url(/build/img/soad.avif);
+}
+
+.calendario {
+    @include m.list-reset;
+    li  {
+        padding: 1rem;
+        span {
+            color: v.$blacky;
+            font-weight: 600;
+            font-size: 2.5rem;
+            padding-left: 2.5rem;
+            font-family: v.$second_font;
+            text-shadow: -1px 1px 0px v.$cream;
+            letter-spacing: 3px;
+        }
+    }
+}
+.nombre-escenario {
+    font-size: 4rem;
+    text-shadow: -2px 2px 0px v.$blacky;
+    font-family: v.$main_font;
+    letter-spacing: 5px;
+    margin: 1rem;
+    font-weight: 100;
+}
+
+.bg-color1 {
+    background-color: v.$pink;
+    color: v.$cream;
+    li:nth-child(odd) {
+        background-color: darken(v.$pink, 3%);
+    }
+    .nombre-escenario {
+        color: v.$sand;
+    }
+}
+
+.bg-color2 {
+    background-color: v.$sand;
+    li:nth-child(odd) {
+        background-color: darken(v.$sand, 4%);
+    }
+    .nombre-escenario {
+        color: v.$pink;
+    }
+}

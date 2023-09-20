@@ -1,0 +1,51 @@
+7/7/23
+**SASS**
+Posterior a abrir el archivo en vs code lo primero que hay quye hacer es instalar sass como dependencia de desarrollo con npm 
+"npm init" "npm -D i sass"
+
+En este punto lo ideal es crear la ruta desde la cual sass va a estar a la escucha de cambios a compilar. En este proyecto se crearon las rutas src/scss y dentro de esta ultima se creó el archivo app.scss
+
+Luego indicarle al compilador de sass de donde va a extraer los archivos y hacia los va a exportar. Para eso en el package.json se debe crear el script:
+"sass": "sass --watch src/scss:build/css/"
+
+Donde:
+"sass" es el nombre del scrip", el otro sass es el archivo de dependencia ubicadoi en los binarios, "src/scss" es la ruta de donde se extraeran los datos a compilar, build/css" es la ruta en donde se van a almacenar los archivos ya compilados a la hoja de estilos. -esta es la hoja que debe estar linkeada al index.html-
+--watch es un parametro que permite que este comando se ejecute constantemente, lo mantiene a la escucha de cambios a compilar.
+
+***
+Es importante notar que todo este procedimiento se puede evitar simplemente instalando la extension live sass compiler y modificando y estableciendo desde sus opciones la ruta hacia la cual queremos que vaya el archivo compilado. En este caso "build/css/app.css"
+
+  "savePath": "/build/css",
+***
+
+  Para que los cambios sean efectivos se debe crear el link en el index.html hacia la hoja de estilo de css, la cual se ira modificando a partir de las hojas de estilo de sass ya compiladas. La rura en este caso es build/css/app.css
+
+
+**GULP**
+  Luego lo que viene es instalar Gulp. La idea de instalar Gulp es poder ademas de compilar hojas de estilo de sass, tambien se pueden comprimir lotes de imagenes entras funciones que permite gulp.
+
+  Instalar gulp como dependencia de desarrollo:
+  "npm -D i gulp"
+  crear el archivo "gulpfile.js" en la raiz, el cual será el contenedor de las tareas y configurarlo tomando en cuenta los siguientes parametros.
+
+01 Extraer funcionalidades de gulp.
+const {src, dest} = require("gulp"); 
+
+02 Importar dependencia de sass y mandar a llamar sus funcionalidades 
+const sass = require("gulp-sass")(require("sass")); 
+
+03 Crear la funcion.
+
+function css(done) {  
+    src("src/scss/app.scss")        //Identificar el archivo SASS.
+        .pipe(sass())               // Compilarlo.
+        .pipe(dest("build/css"))    //Almacena en disco duro.
+    done(); // llamado a callback
+}
+exports.css = css;
+
+
+la version de gulp-imagemin que funciona es la 7.1.0
+npm -D i gulp-imagemin@7.1.0
+
+el @ indica que version quiero que se instale.
